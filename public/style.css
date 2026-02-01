@@ -1,0 +1,343 @@
+:root{
+  --bg:#f6f7fb;
+  --panel:#ffffff;
+  --accent:#2d8cff;
+  --accent-2:#7b61ff;
+  --muted:#888;
+  --system:#2b2b2b;
+  --danger:#b00020;
+  --glass: rgba(255,255,255,0.65);
+  --soft-shadow: 0 8px 30px rgba(30,40,80,0.06);
+  --rounded: 10px;
+  --max-width:1000px;
+}
+
+/* Global reset & base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, #f6f8fc 0%, #eef3fb 100%);
+  color:#111;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* App container */
+.container{
+  width:95%;
+  max-width:var(--max-width);
+  background:var(--panel);
+  border-radius:14px;
+  box-shadow:var(--soft-shadow);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  border:1px solid rgba(30,40,80,0.04);
+}
+
+/* Header */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+  border-bottom:1px solid #f0f3fa;
+  background: linear-gradient(90deg, rgba(45,140,255,0.06), rgba(123,97,255,0.02));
+}
+header h1{
+  margin:0;
+  font-size:18px;
+  letter-spacing:0.2px;
+  color:var(--system);
+}
+#meta{
+  font-size:13px;
+  color:var(--muted);
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+/* Video controls (header-right) */
+.video-controls{ display:flex; gap:8px; align-items:center; }
+.video-controls button{
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(45,140,255,0.18);
+  cursor:pointer;
+  font-weight:600;
+  transition:transform .14s ease, box-shadow .14s;
+}
+.video-controls button:active{ transform:translateY(1px) }
+.video-controls button[disabled]{
+  opacity:0.5; cursor:not-allowed; box-shadow:none;
+}
+
+/* Layout */
+main{
+  display:flex;
+  min-height:62vh;
+  gap:0;
+}
+
+/* Sidebar (participants) */
+aside{
+  width:240px;
+  border-right:1px solid #f2f5fb;
+  padding:14px;
+  background:linear-gradient(180deg,#fbfdff,#fafcff);
+}
+aside h3{margin:0 0 8px 0; font-size:14px; color:#333}
+#users{list-style:none; padding:8px 0 0 0; margin:0; max-height:52vh; overflow:auto}
+#users li{
+  padding:8px 10px;
+  border-radius:10px;
+  margin-bottom:8px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(245,250,255,0.9));
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  transition:transform .12s ease, background .12s;
+  box-shadow: 0 3px 10px rgba(18,25,40,0.03);
+  font-size:14px;
+  color:#16324f;
+}
+#users li:hover{ transform:translateY(-2px); background:#eef6ff; }
+.recipient-panel{margin-top:12px}
+.recipient-panel label{font-size:13px; color:var(--muted)}
+#recipient-select{width:100%; padding:8px; margin-top:6px; border-radius:10px; border:1px solid #e9eef9; background:linear-gradient(180deg,#fff,#fbfdff)}
+
+/* Chat area */
+.chat{flex:1; display:flex; flex-direction:column; background:transparent}
+#messages{
+  list-style:none;
+  padding:18px;
+  margin:0;
+  flex:1;
+  overflow:auto;
+  scroll-behavior:smooth;
+  background:
+    radial-gradient(1200px 1200px at 0% -10%, rgba(45,140,255,0.02), transparent 8%),
+    radial-gradient(900px 900px at 100% 110%, rgba(123,97,255,0.02), transparent 8%);
+}
+
+/* Individual messages */
+#messages li{margin-bottom:12px; max-width:78%; transition:all .12s}
+.msg-user{font-weight:700; margin-right:8px; color:#16324f}
+.msg-time{color:var(--muted); font-size:12px; margin-left:8px}
+.system{color:var(--system); font-style:italic; opacity:0.9}
+.private{
+  background:linear-gradient(180deg,#fff8f0,#fff6ea);
+  border:1px solid #ffecd2;
+  padding:10px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(250,160,40,0.06);
+}
+.public{
+  background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.9));
+  padding:8px;
+  border-radius:10px;
+}
+
+/* Image & file previews */
+.msg-image{max-width:360px; border-radius:12px; display:block; margin-top:8px; box-shadow:0 6px 22px rgba(20,30,60,0.06)}
+.message-file{
+  display:inline-flex;
+  gap:10px;
+  align-items:center;
+  padding:8px 10px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+  border:1px solid #eef6ff;
+  box-shadow:0 6px 16px rgba(10,20,40,0.03);
+  margin-top:8px;
+}
+.message-file a{color:var(--accent); font-weight:600; text-decoration:none}
+
+/* Message input area */
+.message-form{
+  display:flex;
+  padding:12px;
+  border-top:1px solid #f0f3fa;
+  align-items:flex-end;
+  gap:10px;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+}
+.controls{display:flex; flex-direction:column; gap:8px}
+.controls button{
+  background:var(--glass);
+  border:1px solid rgba(10,20,40,0.04);
+  padding:8px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:transform .12s, background .12s;
+}
+.controls button:hover{ transform:translateY(-3px); background:linear-gradient(90deg,#fff,#f4fbff) }
+
+#emoji-panel{display:flex; gap:6px; padding:8px; margin-bottom:6px; flex-wrap:wrap; background:#fff; border:1px solid #f1f6ff; border-radius:10px}
+.emoji-btn{padding:8px; border-radius:8px; border:none; background:#fafafa; cursor:pointer}
+.emoji-btn:hover{background:#f0f8ff}
+.message-form input{
+  flex:1;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #e9eef9;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+  font-size:15px;
+  outline:none;
+  transition:box-shadow .12s;
+}
+.message-form input:focus{ box-shadow:0 6px 18px rgba(45,140,255,0.08); border-color:rgba(45,140,255,0.18) }
+.message-form button{ padding:10px 16px; background:var(--accent); color:white; border:none; border-radius:10px; cursor:pointer; font-weight:700; box-shadow:0 8px 26px rgba(45,140,255,0.16) }
+.note.small{font-size:12px; color:var(--muted); padding:10px 14px}
+
+/* Login overlay */
+.overlay{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(0deg, rgba(20,30,60,0.45), rgba(20,30,60,0.45)); z-index:60 }
+.login-box{
+  background:linear-gradient(180deg,#ffffff,#fbfdff);
+  padding:26px; border-radius:14px; min-width:320px; text-align:center;
+  box-shadow:0 12px 40px rgba(10,20,40,0.25);
+  border:1px solid rgba(255,255,255,0.6);
+}
+.login-box input{width:100%; padding:12px; margin:10px 0; border-radius:10px; border:1px solid #e9eef9}
+.login-box button{padding:12px 18px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; border:none; border-radius:10px; cursor:pointer; font-weight:700}
+.note{font-size:12px; color:var(--muted)}
+.error{color:var(--danger)}
+
+/* Video feed (right side / overlay) */
+.video-feed{
+  position:fixed;
+  right:18px;
+  top:82px;
+  width:360px;
+  height:76vh;
+  background:linear-gradient(180deg,#0f1724,rgba(0,0,0,0.02));
+  color:#fff;
+  z-index:50;
+  overflow-y:auto;
+  scroll-snap-type: y mandatory;
+  border-radius:14px;
+  box-shadow:0 18px 50px rgba(10,20,50,0.35);
+  border:1px solid rgba(255,255,255,0.04);
+  padding:6px;
+  transition:transform .18s ease, opacity .18s ease;
+  scrollbar-width:thin;
+}
+.video-feed.hidden{ transform:translateY(8px) scale(.98); opacity:0; pointer-events:none; }
+.video-item{
+  scroll-snap-align:start;
+  height:72vh;
+  min-height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:10px;
+  background:#000;
+}
+.video-item video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:contrast(1.02) saturate(1.05);
+  transform-origin:center;
+  transition:transform .3s ease;
+}
+.video-item:hover video{ transform:scale(1.02) }
+
+/* overlay controls on video */
+.video-overlay{
+  position:absolute;
+  right:10px;
+  bottom:14px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  align-items:center;
+  z-index:40;
+}
+.video-overlay button{
+  padding:10px;
+  border-radius:12px;
+  border:none;
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  color:white;
+  min-width:60px;
+  cursor:pointer;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  box-shadow:0 8px 22px rgba(0,0,0,0.45);
+}
+.video-overlay button[disabled]{ opacity:0.55; cursor:not-allowed; box-shadow:none }
+
+/* small badge for like counts */
+.video-like-badge{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  padding:6px 8px; border-radius:999px; color:white; font-weight:700;
+  box-shadow:0 8px 20px rgba(90,40,255,0.14);
+}
+
+/* Admin page specific */
+.admin-panel{ padding:18px; }
+table{ width:100%; border-collapse:collapse; margin-top:12px }
+th,td{ border-bottom:1px solid #eef4ff; padding:10px 8px; text-align:left; font-size:14px }
+th{ color:var(--muted); font-weight:700; background:transparent }
+button.kick{ background:#ff5a6e; color:white; border:none; padding:8px 10px; border-radius:8px; cursor:pointer }
+button.kick:hover{ transform:translateY(-2px) }
+
+/* File preview link in messages */
+.message-file a{ color:var(--accent); text-decoration:none }
+.message-file a:hover{ text-decoration:underline }
+
+/* Small screens responsiveness */
+@media(max-width:920px){
+  .video-feed{
+    right:12px; width:320px; height:50vh; top:auto; bottom:14px;
+  }
+  .video-item{ height:46vh; min-height:220px }
+  aside{ display:none }
+  .container{ max-width:940px }
+}
+
+/* Very small screens: video becomes full-width strip */
+@media(max-width:600px){
+  .video-feed{
+    position:static;
+    width:100%;
+    height:48vh;
+    border-radius:0;
+    box-shadow:none;
+    padding:0;
+  }
+  .container{ border-radius:0; }
+}
+
+/* Nice invisible custom scrollbar for modern browsers */
+#users::-webkit-scrollbar, #messages::-webkit-scrollbar, .video-feed::-webkit-scrollbar{
+  width:10px; height:10px;
+}
+#users::-webkit-scrollbar-thumb, #messages::-webkit-scrollbar-thumb, .video-feed::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, rgba(45,140,255,0.16), rgba(123,97,255,0.08));
+  border-radius:999px;
+  border:2px solid rgba(255,255,255,0.6);
+}
+
+/* Utility */
+.hidden{ display:none !important }

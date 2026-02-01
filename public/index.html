@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>LAN Class Chat</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body{font-family:sans-serif;margin:0;padding:16px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    #messages{height:60vh;overflow:auto;border:1px solid #e6e6e6;padding:12px;list-style:none}
+    .controls{display:flex;gap:8px;margin-top:8px}
+    .small{font-size:0.9rem;color:#666}
+    #logout{background:#e53935;color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Class LAN Chat</h1>
+    <div>
+      <span id="meName"></span>
+      <button id="logout">Logout</button>
+      <a href="/login.html" id="loginLink" style="display:none">Login</a>
+      <a href="/admin.html" id="adminLink" style="margin-left:8px">Admin</a>
+    </div>
+  </header>
+
+  <div>
+    <div class="small">Participants: <span id="user-count">0</span>/<span id="user-max">64</span></div>
+    <ul id="messages"></ul>
+
+    <form id="message-form" style="margin-top:12px">
+      <div>
+        <select id="recipient-select"><option value="">Everyone</option></select>
+      </div>
+      <div class="controls">
+        <button id="emoji-toggle" type="button">😊</button>
+        <!-- image sharing removed -->
+        <input id="file-input" type="file" accept=".pdf,.ppt,.pptx,.txt" style="display:none" />
+        <button id="file-btn" type="button">📎</button>
+      </div>
+      <div style="margin-top:8px">
+        <input id="message-input" autocomplete="off" placeholder="Type a message and press Enter" maxlength="1000" style="width:70%;padding:8px" />
+        <button type="submit">Send</button>
+      </div>
+    </form>
+    <div class="small">Attachments allowed: pdf, ppt, pptx, txt (<=10MB).</div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
